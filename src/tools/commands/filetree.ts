@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'filetree';
@@ -16,6 +16,7 @@ const createDocWithMdHandler: CommandHandler = {
         markdown: z.string().describe('Markdown content')
     }),
     handler: createHandler('/api/filetree/createDocWithMd'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Create a document with Markdown content',
         params: {
@@ -70,6 +71,7 @@ const renameDocHandler: CommandHandler = {
         title: z.string().describe('New document title')
     }),
     handler: createHandler('/api/filetree/renameDoc'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Rename a document',
         params: {
@@ -119,6 +121,7 @@ const removeDocHandler: CommandHandler = {
         path: z.string().describe('Document path')
     }),
     handler: createHandler('/api/filetree/removeDoc'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Remove a document',
         params: {
@@ -163,6 +166,7 @@ const moveDocsHandler: CommandHandler = {
         toPath: z.string().describe('Target document path')
     }),
     handler: createHandler('/api/filetree/moveDocs'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Move documents',
         params: {
@@ -212,6 +216,7 @@ const getHPathByPathHandler: CommandHandler = {
         path: z.string().describe('Document path')
     }),
     handler: createHandler('/api/filetree/getHPathByPath'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get document HPath by path',
         params: {
@@ -258,6 +263,7 @@ const getHPathByIDHandler: CommandHandler = {
         id: z.string().describe('Document ID')
     }),
     handler: createHandler('/api/filetree/getHPathByID'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get document HPath by ID',
         params: {

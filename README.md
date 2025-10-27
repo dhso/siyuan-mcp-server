@@ -128,6 +128,13 @@ The server requires the following environment variables:
   * 在思源笔记设置 - 关于 中查看 | Check in SiYuan Note Settings - About
   * 用于 API 认证 | Used for API authentication
 
+* `SIYUAN_API_URL` - 思源笔记 API 地址（可选）| SiYuan Note API URL (optional)
+  * 默认值: `http://localhost:6806` | Default: `http://localhost:6806`
+  * 如果思源笔记运行在不同的主机或端口上，请设置此变量 | Set this variable if SiYuan Note runs on a different host or port
+
+* `MODE` - 运行模式，默认读写
+  * READ - 只读模式
+
 ### 在 Claude Desktop 中使用 | Using in Claude Desktop
 
 将以下配置添加到 `claude_desktop_config.json`：
@@ -143,7 +150,8 @@ Add the following configuration to `claude_desktop_config.json`:
         "@onigeya/siyuan-mcp-server"
       ],
       "env": {
-        "SIYUAN_TOKEN": "your-siyuan-token"
+        "SIYUAN_TOKEN": "your-siyuan-token",
+        "MODE": "READ"
       }
     }
   }
@@ -176,6 +184,7 @@ pnpm start
 ```bash
 docker run --rm -i \
   -e SIYUAN_TOKEN=your-siyuan-token \
+  -e MODE="READ" \
   mcp/siyuan
 ```
 

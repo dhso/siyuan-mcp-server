@@ -12,6 +12,11 @@ export interface McpResponse<T = any> {
     isError?: boolean;
 }
 
+export enum McpMode {
+    READ = 'READ',
+    WRITE = 'WRITE'
+}
+
 /**
  * 命令处理器接口
  */
@@ -26,6 +31,8 @@ export interface CommandHandler<P = unknown> {
     params: z.ZodSchema<P>;
     /** 命令处理函数 */
     handler: (params: P) => Promise<McpResponse>;
+    /** 命令读写分类 */
+    mode: McpMode[],
     /** 命令文档 */
     documentation?: {
         /** 详细描述 */
@@ -107,6 +114,10 @@ class CommandRegistry {
         const fullName = this.getFullCommandName(command.namespace, command.name);
         if (this.commands.has(fullName)) {
             console.warn(`警告：命令 ${fullName} 已存在，将被覆盖`);
+        }
+        if (process.env.MODE === McpMode.READ && !command.mode.includes(McpMode.READ)) {
+            console.info(`提示：命令 ${fullName} 没有包含 '读' 属性，跳过！`);
+            return
         }
         this.commands.set(fullName, command);
     }

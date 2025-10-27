@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'sql';
@@ -14,6 +14,7 @@ const sqlHandler: CommandHandler = {
         stmt: z.string().describe('SQL statement')
     }),
     handler: createHandler('/api/query/sql'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Execute SQL query',
         params: {

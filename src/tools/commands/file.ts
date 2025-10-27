@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'file';
@@ -14,6 +14,7 @@ const getFileHandler: CommandHandler = {
         path: z.string().describe('File path')
     }),
     handler: createHandler('/api/file/getFile'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get file content',
         params: {
@@ -58,6 +59,7 @@ const putFileHandler: CommandHandler = {
         isDir: z.boolean().optional().describe('Whether it is a directory')
     }),
     handler: createHandler('/api/file/putFile'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Put file content',
         params: {
@@ -109,6 +111,7 @@ const removeFileHandler: CommandHandler = {
         path: z.string().describe('File path')
     }),
     handler: createHandler('/api/file/removeFile'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Remove file',
         params: {
@@ -145,6 +148,7 @@ const readDirHandler: CommandHandler = {
         path: z.string().describe('Directory path')
     }),
     handler: createHandler('/api/file/readDir'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'List files in directory',
         params: {

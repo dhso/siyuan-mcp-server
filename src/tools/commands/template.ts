@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'template';
@@ -15,6 +15,7 @@ const renderTemplateHandler: CommandHandler = {
         path: z.string().describe('Target path')
     }),
     handler: createHandler('/api/template/render'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Render template',
         params: {
@@ -62,6 +63,7 @@ const renderSprigHandler: CommandHandler = {
         context: z.record(z.any()).describe('Template context')
     }),
     handler: createHandler('/api/template/renderSprig'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Render Sprig template',
         params: {

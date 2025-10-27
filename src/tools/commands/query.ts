@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'query';
@@ -14,6 +14,7 @@ const sqlHandler: CommandHandler = {
         stmt: z.string().describe('SQL statement')
     }),
     handler: createHandler('/api/query/sql'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Execute SQL query',
         params: {
@@ -59,6 +60,7 @@ const blockHandler: CommandHandler = {
         id: z.string().describe('Block ID')
     }),
     handler: createHandler('/api/query/block'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Query block by ID',
         params: {

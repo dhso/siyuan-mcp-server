@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'attr';
@@ -15,6 +15,7 @@ const setBlockAttrsHandler: CommandHandler = {
         attrs: z.record(z.string()).describe('Attribute key-value pairs')
     }),
     handler: createHandler('/api/attr/setBlockAttrs'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Set block attributes',
         params: {
@@ -59,6 +60,7 @@ const getBlockAttrsHandler: CommandHandler = {
         id: z.string().describe('Block ID')
     }),
     handler: createHandler('/api/attr/getBlockAttrs'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get block attributes',
         params: {

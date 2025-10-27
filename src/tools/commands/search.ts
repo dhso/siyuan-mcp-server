@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'search';
@@ -21,6 +21,7 @@ const fullTextSearchHandler: CommandHandler = {
         limit: z.number().optional().describe('Results per page')
     }),
     handler: createHandler('/api/search/fullTextSearch'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Full text search',
         params: {

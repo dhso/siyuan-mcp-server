@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'convert';
@@ -15,6 +15,7 @@ const pandocHandler: CommandHandler = {
         args: z.array(z.string()).describe('Pandoc arguments')
     }),
     handler: createHandler('/api/convert/pandoc'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Convert content using Pandoc',
         params: {

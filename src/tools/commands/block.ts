@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'block';
@@ -17,6 +17,7 @@ const insertBlockHandler: CommandHandler = {
         parentID: z.string().optional().describe('Parent block ID')
     }),
     handler: createHandler('/api/block/insertBlock'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Insert a block',
         params: {
@@ -83,6 +84,7 @@ const updateBlockHandler: CommandHandler = {
         id: z.string().describe('Block ID')
     }),
     handler: createHandler('/api/block/updateBlock'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Update block content',
         params: {
@@ -141,6 +143,7 @@ const deleteBlockHandler: CommandHandler = {
         id: z.string().describe('Block ID')
     }),
     handler: createHandler('/api/block/deleteBlock'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Delete a block',
         params: {
@@ -188,6 +191,7 @@ const moveBlockHandler: CommandHandler = {
         parentID: z.string().optional().describe('Parent block ID')
     }),
     handler: createHandler('/api/block/moveBlock'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Move a block',
         params: {
@@ -247,6 +251,7 @@ const getBlockKramdownHandler: CommandHandler = {
         id: z.string().describe('Block ID')
     }),
     handler: createHandler('/api/block/getBlockKramdown'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get block Kramdown content',
         params: {

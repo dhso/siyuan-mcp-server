@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'network';
@@ -17,6 +17,7 @@ const forwardProxy: CommandHandler = {
         headers: z.record(z.string()).optional().describe('Request headers')
     }),
     handler: createHandler('/api/network/forwardProxy'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Forward proxy request',
         params: {

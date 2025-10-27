@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'export';
@@ -16,6 +16,7 @@ const exportNotebookHandler: CommandHandler = {
         type: z.enum(['markdown', 'pdf', 'word', 'html']).describe('Export type')
     }),
     handler: createHandler('/api/export/exportNotebook'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Export notebook',
         params: {
@@ -70,6 +71,7 @@ const exportDocHandler: CommandHandler = {
         type: z.enum(['markdown', 'pdf', 'word', 'html']).describe('Export type')
     }),
     handler: createHandler('/api/export/exportDoc'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Export document',
         params: {

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'assets';
@@ -16,6 +16,7 @@ const uploadAssetsHandler: CommandHandler = {
             data: z.string().describe('Base64 encoded file content')
         })).describe('A list of file or folder paths to be uploaded')
     }),
+    mode: [McpMode.WRITE],
     handler: createHandler('/api/asset/upload'),
     documentation: {
         description: 'Upload assets to workspace',

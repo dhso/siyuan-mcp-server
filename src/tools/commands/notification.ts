@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'notification';
@@ -15,6 +15,7 @@ const pushMsgHandler: CommandHandler = {
         timeout: z.number().optional().describe('Message display duration in milliseconds')
     }),
     handler: createHandler('/api/notification/pushMsg'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Push a message notification',
         params: {
@@ -58,6 +59,7 @@ const pushErrMsgHandler: CommandHandler = {
         timeout: z.number().optional().describe('Message display duration in milliseconds')
     }),
     handler: createHandler('/api/notification/pushErrMsg'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: 'Push an error message notification',
         params: {

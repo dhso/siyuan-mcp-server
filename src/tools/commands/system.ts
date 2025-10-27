@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 const namespace = 'system';
@@ -12,6 +12,7 @@ const getBootProgressHandler: CommandHandler = {
     description: 'Get boot progress',
     params: z.object({}),
     handler: createHandler('/api/system/getBootProgress'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get boot progress',
         params: {},
@@ -44,6 +45,7 @@ const getVersionHandler: CommandHandler = {
     description: 'Get system version',
     params: z.object({}),
     handler: createHandler('/api/system/version'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get system version',
         params: {},
@@ -76,6 +78,7 @@ const getCurrentTimeHandler: CommandHandler = {
     description: 'Get current time',
     params: z.object({}),
     handler: createHandler('/api/system/currentTime'),
+    mode: [McpMode.READ],
     documentation: {
         description: 'Get current time',
         params: {},

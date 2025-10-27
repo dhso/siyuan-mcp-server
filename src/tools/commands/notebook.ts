@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createHandler } from '../../utils/client.js';
-import { registry } from '../../utils/registry.js';
+import { McpMode, registry } from '../../utils/registry.js';
 import { CommandHandler } from '../../utils/registry.js';
 
 // 定义参数类型
@@ -38,6 +38,7 @@ const lsNotebooksHandler: CommandHandler = {
     description: '列出所有笔记本',
     params: z.object({}),
     handler: createHandler('/api/notebook/lsNotebooks'),
+    mode: [McpMode.READ],
     documentation: {
         description: '列出所有笔记本',
         params: {},
@@ -80,6 +81,7 @@ const openNotebookHandler: CommandHandler = {
     description: '打开笔记本',
     params: notebookSchema,
     handler: createHandler('/api/notebook/openNotebook'),
+    mode: [McpMode.READ],
     documentation: {
         description: '打开笔记本',
         params: {
@@ -114,6 +116,7 @@ const closeNotebookHandler: CommandHandler = {
     description: '关闭笔记本',
     params: notebookSchema,
     handler: createHandler('/api/notebook/closeNotebook'),
+    mode: [McpMode.READ],
     documentation: {
         description: '关闭笔记本',
         params: {
@@ -148,6 +151,7 @@ const renameNotebookHandler: CommandHandler = {
     description: '重命名笔记本',
     params: notebookAndNameSchema,
     handler: createHandler('/api/notebook/renameNotebook'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: '重命名笔记本',
         params: {
@@ -188,6 +192,7 @@ const createNotebookHandler: CommandHandler = {
     description: '创建笔记本',
     params: nameSchema,
     handler: createHandler('/api/notebook/createNotebook'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: '创建笔记本',
         params: {
@@ -226,6 +231,7 @@ const removeNotebookHandler: CommandHandler = {
     description: '删除笔记本',
     params: notebookSchema,
     handler: createHandler('/api/notebook/removeNotebook'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: '删除笔记本',
         params: {
@@ -260,6 +266,7 @@ const getNotebookConfHandler: CommandHandler = {
     description: '获取笔记本配置',
     params: notebookSchema,
     handler: createHandler('/api/notebook/getNotebookConf'),
+    mode: [McpMode.READ],
     documentation: {
         description: '获取笔记本配置',
         params: {
@@ -308,6 +315,7 @@ const setNotebookConfHandler: CommandHandler = {
     description: '设置笔记本配置',
     params: notebookAndConfSchema,
     handler: createHandler('/api/notebook/setNotebookConf'),
+    mode: [McpMode.WRITE],
     documentation: {
         description: '设置笔记本配置',
         params: {
